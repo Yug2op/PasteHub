@@ -1,0 +1,14 @@
+body{
+    background-color: rgb(52, 77, 122);
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.div1{
+    background-color: rgb(25, 45, 82);
+}
+.input1{
+    background-color: rgb(20, 35, 63);
+    color: white;
+}
