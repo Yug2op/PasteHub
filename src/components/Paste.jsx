@@ -14,7 +14,6 @@ const Paste = () => {
     paste.title?.toLowerCase().includes(searchTerms.toLowerCase())
   );
 
-
   function handleDelete(pasteId) {
     dispatch(removeFromPastes(pasteId));
     toast.success('Paste deleted successfully');
@@ -37,7 +36,7 @@ const Paste = () => {
     } else {
       try {
         await navigator.clipboard.writeText(window.location.href);
-        alert("Link copied to clipboard!");
+        toast.success("Link copied to clipboard!");
       } catch (error) {
         console.error("Failed to copy:", error);
       }
@@ -45,21 +44,17 @@ const Paste = () => {
   };
 
   return (
-    <div
-      className="min-h-screen p-6"
-    >
-      <div
-        className="p-4 rounded-t-xl div1"
-      >
-        <div className="flex items-center w-full gap-2">
+    <div className="min-h-screen p-4 sm:p-6">
+      <div className="p-4 rounded-t-xl div1">
+        <div className="flex flex-col sm:flex-row items-center w-full gap-2">
           <input
             type="search"
             placeholder="Search here..."
             value={searchTerms}
             onChange={(e) => setSearchTerms(e.target.value)}
-            className="p-2 rounded w-3/4 bg-gray-800 text-white placeholder-gray-400 text-center focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="p-2 rounded w-full sm:w-3/4 bg-gray-800 text-white placeholder-gray-400 text-center focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <button className="w-1/4">
+          <button className="w-full sm:w-1/4">
             <Link
               to="/"
               className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 flex justify-center"
@@ -68,24 +63,17 @@ const Paste = () => {
             </Link>
           </button>
         </div>
-
       </div>
 
-
       {/* Content */}
-      <div
-        className="p-4 rounded-b-lg div1"
-      >
+      <div className="p-4 rounded-b-lg div1">
         {filteredData.length > 0 ? (
           filteredData.map((paste, index) => (
-            <div
-              key={paste._id || index}
-              className="mb-6 p-4 bg-gray-700 text-white rounded-lg"
-            >
+            <div key={paste._id || index} className="mb-6 p-4 bg-gray-700 text-white rounded-lg">
               <div className="text-xl font-bold mb-2">{paste.title}</div>
               <div className="mb-4">{paste.content}</div>
 
-              <div className="flex gap-4 justify-evenly">
+              <div className="flex flex-wrap gap-4 justify-center sm:justify-evenly">
                 <Link
                   to={`/?pasteId=${paste?._id}`}
                   className="flex items-center gap-2 text-blue-400 hover:text-blue-500"
@@ -126,7 +114,7 @@ const Paste = () => {
               </div>
 
               <div className="mt-4 text-gray-400 text-sm">
-                Created At: {new Date(paste.createdAt).toLocaleString()}
+                Created At: {paste.createdAt ? new Date(paste.createdAt).toLocaleString() : "Unknown"}
               </div>
             </div>
           ))

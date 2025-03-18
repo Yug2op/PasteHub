@@ -70,26 +70,27 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Dropdown Menu */}
-      {isOpen && (
-        <div className="sm:hidden">
-          <NavLink
-            to="/"
-            className="block px-4 py-2 text-white hover:bg-gray-700"
-            onClick={() => setIsOpen(false)}
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/pastes"
-            className="block px-4 py-2 text-white hover:bg-gray-700"
-            onClick={() => setIsOpen(false)}
-          >
-            Pastes
-          </NavLink>
-        </div>
-      )}
+      {/* Mobile Dropdown Menu with Fixes */}
+      <div
+        className={`sm:hidden absolute left-0 w-full bg-gray-800 shadow-md rounded-b-lg transition-all ${
+          isOpen ? "opacity-100 h-auto py-2" : "opacity-0 h-0 overflow-hidden"
+        }`}
+      >
+        <NavLink
+          to="/"
+          className="block px-4 py-2 text-white hover:bg-gray-700"
+          onClick={() => setIsOpen(false)}
+        >
+          Home
+        </NavLink>
+        <NavLink
+          to="/pastes"
+          className="block px-4 py-2 text-white hover:bg-gray-700"
+          onClick={() => setIsOpen(false)}
+        >
+          Pastes
+        </NavLink>
+      </div>
     </nav>
   );
 }
-
