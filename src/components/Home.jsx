@@ -12,7 +12,21 @@ function Home() {
     const dispatch = useDispatch();
     const allPastes = useSelector((state) => state.paste.pastes);
 
+    const [title, setTitle] = useState("");
+    const [value, setValue] = useState("");
+    const [searchParams, setSearchParams] = useSearchParams();
+    const pasteId = searchParams.get('pasteId');
+
+    const dispatch = useDispatch();
+    const allPastes = useSelector((state) => state.paste.pastes);
+
     useEffect(() => {
+        if (pasteId && allPastes.length > 0) {
+            const paste = allPastes.find((p) => p._id === pasteId);
+            if (paste) {
+                setTitle(paste.title);
+                setValue(paste.content);
+            }
         if (pasteId && allPastes.length > 0) {
             const paste = allPastes.find((p) => p._id === pasteId);
             if (paste) {
@@ -21,19 +35,23 @@ function Home() {
             }
         }
     }, [pasteId, allPastes]);
+    }, [pasteId, allPastes]);
 
     function createPaste() {
         if (!title.trim() || !value.trim()) return; // Prevents empty pastes
 
         const paste = {
             title,
+            title,
             content: value,
             _id: pasteId || Date.now().toString(36),
             createdAt: new Date().toISOString(),
         };
+        };
 
         if (pasteId) {
             dispatch(updateToPastes(paste));
+        } else {
         } else {
             dispatch(addToPastes(paste));
         }
@@ -42,7 +60,12 @@ function Home() {
         setTitle('');
         setValue('');
         setSearchParams({});
+        // Reset input fields
+        setTitle('');
+        setValue('');
+        setSearchParams({});
     }
+
 
     return (
         <div className="max-w-3xl mx-auto mt-10 p-6 shadow-lg rounded-lg div1">
@@ -76,4 +99,5 @@ function Home() {
     );
 }
 
+export default Home;
 export default Home;
