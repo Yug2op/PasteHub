@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { addToPastes, updateToPastes } from '../Slice/Slice';
 import { useDispatch, useSelector } from 'react-redux';
+import { addToPastes, updateToPastes } from '../Slice/Slice';
 
 function Home() {
     const [title, setTitle] = useState("");
@@ -23,7 +23,7 @@ function Home() {
     }, [pasteId, allPastes]);
 
     function createPaste() {
-        if (!title.trim() || !value.trim()) return; 
+        if (!title.trim() || !value.trim()) return; // Prevents empty pastes
 
         const paste = {
             title,
@@ -45,20 +45,19 @@ function Home() {
     }
 
     return (
-        <div className="max-w-3xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+        <div className="max-w-3xl mx-auto mt-10 p-6 shadow-lg rounded-lg div1">
             <div className="text-center">
                 <input
                     type="text"
                     placeholder="Enter your title here"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className="w-full mb-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full mb-4 p-2 border border-gray-300 rounded-md input1 focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
 
                 <button
                     onClick={createPaste}
-                    className={`w-full mb-4 px-4 py-2 text-white rounded-md 
-                        ${title.trim() && value.trim() ? 'bg-teal-600 hover:bg-teal-700 focus:ring-2 focus:ring-teal-500' : 'bg-gray-400 cursor-not-allowed'}`}
+                    className="w-full mb-4 px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
                     disabled={!title.trim() || !value.trim()}
                 >
                     {pasteId ? 'Update My Paste' : 'Create My Paste'}
@@ -70,7 +69,7 @@ function Home() {
                     value={value}
                     rows={10}
                     onChange={(e) => setValue(e.target.value)}
-                    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full p-2 border border-gray-300 rounded-md input1 focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
             </div>
         </div>
